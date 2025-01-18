@@ -9,8 +9,8 @@ export default function Login() {
     const dispatch = useAppDispatch();
     const { register, handleSubmit } = useForm({
         defaultValues: {
-            userId: "A-0001",
-            password: "ami123",
+            userId: "userId",
+            password: "password",
         },
     });
 
