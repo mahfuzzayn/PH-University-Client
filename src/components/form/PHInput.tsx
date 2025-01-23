@@ -1,5 +1,4 @@
 import { Input } from "antd";
-import FormItemLabel from "antd/es/form/FormItemLabel";
 import { Controller } from "react-hook-form";
 
 type TInputProps = {
