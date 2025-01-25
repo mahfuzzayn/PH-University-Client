@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetSingleStudentQuery } from "../../../redux/features/admin/userManagement.api";
+import { useGetSingleStudentQuery } from "../../../../redux/features/admin/userManagement.api";
 import { Avatar, Descriptions, Divider, Flex } from "antd";
 
 type TApiError = {

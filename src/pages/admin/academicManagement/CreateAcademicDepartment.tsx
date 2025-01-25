@@ -8,11 +8,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { academicDepartmentSchema } from "../../../schemas/academicManagement.schema";
 import {
     useAddAcademicDepartmentMutation,
-    useGetAllFacultiesQuery,
+    useGetAllAcademicFacultiesQuery,
 } from "../../../redux/features/admin/academicManagement.api";
 import { toast } from "sonner";
 import { TResponse } from "../../../types";
 import { TAcademicDepartment } from "../../../types/academicManagement.type";
+import { useGetAllFacultiesQuery } from "../../../redux/features/admin/userManagement.api";
 
 const CreateAcademicDepartment = () => {
     const { data: facultyData } = useGetAllFacultiesQuery(undefined);

@@ -1,6 +1,6 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { TAcademicFaculty } from "../../../types/academicManagement.type";
-import { useGetAllFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useGetAllAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
 
 type TTableData = Pick<TAcademicFaculty, "name">;
 
@@ -9,7 +9,7 @@ const AcademicFaculty = () => {
         data: facultyData,
         isLoading,
         isFetching,
-    } = useGetAllFacultiesQuery(undefined);
+    } = useGetAllAcademicFacultiesQuery(undefined);
 
     const tableData = facultyData?.data?.map(({ _id, name }) => ({
         key: _id,

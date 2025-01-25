@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-import PHForm from "../../../components/form/PHForm";
-import PHInput from "../../../components/form/PHInput";
+import PHForm from "../../../../components/form/PHForm";
+import PHInput from "../../../../components/form/PHInput";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
-import PHSelect from "../../../components/form/PHSelect";
-import { bloodGroupOptions, genderOptions } from "../../../constants/global";
-import PHDatePicker from "../../../components/form/PHDatePicker";
+import PHSelect from "../../../../components/form/PHSelect";
+import { bloodGroupOptions, genderOptions } from "../../../../constants/global";
+import PHDatePicker from "../../../../components/form/PHDatePicker";
 import {
-    useGetAllDepartmentsQuery,
+    useGetAllAcademicDepartmentsQuery,
     useGetAllSemestersQuery,
-} from "../../../redux/features/admin/academicManagement.api";
+} from "../../../../redux/features/admin/academicManagement.api";
 import {
     useGetSingleStudentQuery,
     useUpdateStudentMutation,
-} from "../../../redux/features/admin/userManagement.api";
+} from "../../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
-import { TResponse, TStudent } from "../../../types";
+import { TResponse, TStudent } from "../../../../types";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 
@@ -25,7 +25,7 @@ const StudentUpdate = () => {
     const { data: studentData } = useGetSingleStudentQuery(studentId);
     const { data: sData, isLoading: sIsLoading } =
         useGetAllSemestersQuery(undefined);
-    const { data: dData, isLoading: dIsLoading } = useGetAllDepartmentsQuery(
+    const { data: dData, isLoading: dIsLoading } = useGetAllAcademicDepartmentsQuery(
         undefined,
         { skip: sIsLoading }
     );
@@ -59,7 +59,7 @@ const StudentUpdate = () => {
         : {};
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const toastId = toast.loading("Creating...");
+        const toastId = toast.loading("Updating...");
 
         const updatedData = {
             student: data,

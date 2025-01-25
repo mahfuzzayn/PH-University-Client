@@ -10,20 +10,17 @@ import {
     TableProps,
 } from "antd";
 import { useState } from "react";
-import { TQueryParam, TResponse, TStudent } from "../../../types";
+import { TQueryParam, TResponse, TStudent } from "../../../../types";
 import {
     useBlockStudentMutation,
     useGetAllStudentsQuery,
-} from "../../../redux/features/admin/userManagement.api";
+} from "../../../../redux/features/admin/userManagement.api";
 import { Link } from "react-router-dom";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { toast } from "sonner";
-import { TUser } from "../../../redux/features/auth/authSlice";
+import { TUser } from "../../../../redux/features/auth/authSlice";
 
-type TTableData = Pick<
-    TStudent,
-    "fullName" | "id" | "email" | "contactNo" | "user"
->;
+type TTableData = Pick<TStudent, "fullName" | "id" | "email" | "contactNo">;
 
 const StudentData = () => {
     const [params, setParams] = useState<TQueryParam[]>([]);
@@ -33,16 +30,15 @@ const StudentData = () => {
 
     const showDeleteConfirm = (studentId: string) => {
         confirm({
-            title: "Are you sure delete this task?",
+            title: "Are you sure block this student?",
             icon: <ExclamationCircleFilled />,
-            content: "Some descriptions",
+            content: "This cannot be undone",
             okText: "Yes",
             okType: "danger",
             cancelText: "No",
             async onOk() {
-                console.log(studentId);
                 try {
-                    const toastId = toast.loading("Blocking user ");
+                    const toastId = toast.loading("Blocking student ");
 
                     const res = (await blockUser(
                         studentId
@@ -51,7 +47,7 @@ const StudentData = () => {
                     if (res.error) {
                         toast.error(res.error.data.message, { id: toastId });
                     } else {
-                        toast.success("Blocked user", { id: toastId });
+                        toast.success("Blocked student", { id: toastId });
                     }
                 } catch (error) {
                     toast.error("Something went wrong");
@@ -74,8 +70,9 @@ const StudentData = () => {
     const metaData = studentData?.meta;
 
     const tableData = studentData?.data?.map(
-        ({ _id, id, fullName, email, contactNo }) => ({
+        ({ _id, id, user, fullName, email, contactNo }) => ({
             key: _id,
+            user: user._id,
             id,
             fullName,
             email,
@@ -104,13 +101,12 @@ const StudentData = () => {
             title: "Action",
             key: "x",
             render: (item) => {
-                console.log(item);
                 return (
                     <Space>
-                        <Link to={`/admin/student-data/${item._id}`}>
+                        <Link to={`/admin/student-data/${item.key}`}>
                             <Button>Details</Button>
                         </Link>
-                        <Link to={`/admin/student-data/update/${item._id}`}>
+                        <Link to={`/admin/student-data/update/${item.key}`}>
                             <Button>Update</Button>
                         </Link>
                         <Space wrap>

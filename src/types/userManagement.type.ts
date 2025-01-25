@@ -27,6 +27,40 @@ export interface TStudent {
     fullName: string;
 }
 
+export interface TFaculty {
+    id: string;
+    name: TName;
+    designation: string;
+    gender: string;
+    dateOfBirth: string;
+    email: string;
+    contactNo: string;
+    emergencyContactNo: string;
+    bloodGroup: string;
+    presentAddress: string;
+    permanentAddress: string;
+    academicDepartment: string;
+    isDeleted: boolean;
+    fullName: string;
+}
+
+export interface TAdmin {
+    id: string;
+    name: TName;
+    designation: string;
+    gender: string;
+    dateOfBirth: string;
+    email: string;
+    contactNo: string;
+    emergencyContactNo: string;
+    bloodGroup: string;
+    presentAddress: string;
+    permanentAddress: string;
+    managementDepartment: string;
+    isDeleted: boolean;
+    fullName: string;
+}
+
 export interface TUser {
     _id: string;
     id: string;
