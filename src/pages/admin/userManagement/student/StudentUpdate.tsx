@@ -8,7 +8,7 @@ import { bloodGroupOptions, genderOptions } from "../../../../constants/global";
 import PHDatePicker from "../../../../components/form/PHDatePicker";
 import {
     useGetAllAcademicDepartmentsQuery,
-    useGetAllSemestersQuery,
+    useGetAllAcademicSemestersQuery,
 } from "../../../../redux/features/admin/academicManagement.api";
 import {
     useGetSingleStudentQuery,
@@ -24,7 +24,7 @@ const StudentUpdate = () => {
     const [updateStudent] = useUpdateStudentMutation();
     const { data: studentData } = useGetSingleStudentQuery(studentId);
     const { data: sData, isLoading: sIsLoading } =
-        useGetAllSemestersQuery(undefined);
+        useGetAllAcademicSemestersQuery(undefined);
     const { data: dData, isLoading: dIsLoading } = useGetAllAcademicDepartmentsQuery(
         undefined,
         { skip: sIsLoading }

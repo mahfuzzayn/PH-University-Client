@@ -5,9 +5,10 @@ type TInputProps = {
     type: string;
     name: string;
     label?: string;
+    disabled?: boolean;
 };
 
-const PHInput = ({ type, name, label }: TInputProps) => {
+const PHInput = ({ type, name, label, disabled }: TInputProps) => {
     return (
         <div style={{ marginBottom: "20px" }}>
             <Controller
@@ -24,6 +25,7 @@ const PHInput = ({ type, name, label }: TInputProps) => {
                             id={name}
                             style={{ marginTop: "5px" }}
                             size="large"
+                            disabled={disabled}
                         />
 
                         {error && (

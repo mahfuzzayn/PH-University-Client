@@ -28,7 +28,9 @@ export interface TStudent {
 }
 
 export interface TFaculty {
+    _id: string;
     id: string;
+    user: TUser;
     name: TName;
     designation: string;
     gender: string;
@@ -45,7 +47,9 @@ export interface TFaculty {
 }
 
 export interface TAdmin {
+    _id: string;
     id: string;
+    user: TUser;
     name: TName;
     designation: string;
     gender: string;

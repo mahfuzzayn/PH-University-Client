@@ -9,6 +9,7 @@ import {
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
+import { TResponse } from "../../types";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: "http://localhost:5000/api/v1/",
@@ -26,24 +27,18 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-// type TResultError = {
-//     result: {
-//         error: {
-//             data: {
-//                 message: string;
-//             }
-//         }
-//     }
-// }
-
 const baseQueryWithRefreshToken: BaseQueryFn<
     FetchArgs,
     BaseQueryApi,
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
-    let result = await baseQuery(args, api, extraOptions);
+    let result = (await baseQuery(args, api, extraOptions)) as TResponse<any>;
 
     if (result?.error?.status === 404) {
+        toast.error(result?.error?.data?.message);
+    }
+
+    if (result?.error?.status === 403) {
         toast.error(result?.error?.data?.message);
     }
 
@@ -70,7 +65,11 @@ const baseQueryWithRefreshToken: BaseQueryFn<
                 })
             );
 
-            result = await baseQuery(args, api, extraOptions);
+            result = (await baseQuery(
+                args,
+                api,
+                extraOptions
+            )) as TResponse<any>;
         } else {
             api.dispatch(logout());
         }
@@ -82,6 +81,12 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: "baseApi",
     baseQuery: baseQueryWithRefreshToken,
-    tagTypes: ["AcademicSemester", "AcademicFaculty", "AcademicDepartment"],
+    tagTypes: [
+        "AcademicSemester",
+        "AcademicFaculty",
+        "AcademicDepartment",
+        "RegisteredSemester",
+        "courses",
+    ],
     endpoints: () => ({}),
 });

@@ -45,6 +45,7 @@ const CreateFaculty = () => {
         const formData = new FormData();
 
         const facultyData = {
+            password: "ami123",
             faculty: data,
         };
 

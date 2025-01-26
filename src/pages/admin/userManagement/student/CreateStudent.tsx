@@ -8,7 +8,7 @@ import { bloodGroupOptions, genderOptions } from "../../../../constants/global";
 import PHDatePicker from "../../../../components/form/PHDatePicker";
 import {
     useGetAllAcademicDepartmentsQuery,
-    useGetAllSemestersQuery,
+    useGetAllAcademicSemestersQuery,
 } from "../../../../redux/features/admin/academicManagement.api";
 import { useAddStudentMutation } from "../../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
@@ -17,7 +17,7 @@ import { TResponse, TStudent } from "../../../../types";
 const CreateStudent = () => {
     const [addStudent] = useAddStudentMutation();
     const { data: sData, isLoading: sIsLoading } =
-        useGetAllSemestersQuery(undefined);
+        useGetAllAcademicSemestersQuery(undefined);
     const { data: dData, isLoading: dIsLoading } = useGetAllAcademicDepartmentsQuery(
         undefined,
         { skip: sIsLoading }
@@ -71,6 +71,7 @@ const CreateStudent = () => {
         const formData = new FormData();
 
         const studentData = {
+            password: "ami123",
             student: data,
         };
 

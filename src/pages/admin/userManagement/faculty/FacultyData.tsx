@@ -99,7 +99,6 @@ const FacultyData = () => {
             title: "Action",
             key: "x",
             render: (item) => {
-                console.log(item);
                 return (
                     <Space>
                         <Link to={`/admin/faculty-data/${item.key}`}>

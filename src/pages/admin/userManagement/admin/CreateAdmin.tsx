@@ -45,6 +45,7 @@ const CreateAdmin = () => {
         const formData = new FormData();
 
         const adminData = {
+            password: "ami123",
             admin: data,
         };
 

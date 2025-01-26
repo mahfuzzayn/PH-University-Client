@@ -16,7 +16,7 @@ export default function Login() {
     const dispatch = useAppDispatch();
 
     const defaultValues = {
-        userId: "A-0001",
+        userId: "2026030001",
         password: "ami123",
     };
 
@@ -37,7 +37,12 @@ export default function Login() {
 
             dispatch(setUser({ user, token: res.data.accessToken }));
             toast.success("Logged in", { id: toastId, duration: 2000 });
-            navigate(`/${user.role}/dashboard`);
+
+            if (res.data.needsPasswordChange) {
+                navigate("/change-password");
+            } else {
+                navigate(`/${user.role}/dashboard`);
+            }
         } catch (error: any) {
             toast.error("Something went wrong", {
                 id: toastId,
